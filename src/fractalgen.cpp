@@ -2,6 +2,7 @@
 #include <time.h>
 #include <cstdlib>
 #include "Mandelbrot.h"
+//#include "Buddhabrot.h"
 using namespace std;
 
 int main(int argc, char *argv[])

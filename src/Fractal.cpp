@@ -13,8 +13,8 @@ Fractal::Fractal(unsigned int height, unsigned int width)
 
 Fractal::Fractal(double x)
 {
-	unsigned int width = static_cast<int>(5.0*x*100);
-	unsigned int height = static_cast<int>(5.0*x*100);
+	unsigned int width = static_cast<int>(10.0*x*100);
+	unsigned int height = static_cast<int>(10.0*x*100);
     // Pre-allocate memory for the image data
     m_bitmap = (unsigned char *)malloc(height*width*4*sizeof(unsigned char));
 	m_height = height;

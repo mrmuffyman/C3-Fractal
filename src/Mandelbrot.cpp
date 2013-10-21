@@ -29,16 +29,24 @@ void Mandelbrot::gen_fractal()
 		z_r = z_temp;
 		n++;
 	  }
-	 if(n < max_iter){     //continuous coloring.. or something like it.
+	 if(n < max_iter-5){     //continuous coloring.. or something like it.
 		double zn = x*x + y*y;
 		double nu = log(1/(2*log(zn))/log(2<<16))/log(2);
 		n = n + 1 - nu;
+		n = pow(n,2);
 	 }
-	 n = pow(n , 2);	
-	 int R = (pow(((double)n/max_iter), 0.6)) *255;
-	 int G = (pow(((double)n/max_iter), 0.3)) *255;
-         int B = (pow(((double)n/max_iter), 0.2)) *255;
-	 cout << "R:" << R << " G:" << G << " B:" << B <<endl;
+	int R,G,B;
+	 if(n == max_iter){
+		R = 0;
+		G = 0;
+		B = 0;
+	 }
+	else{	
+	 R = (pow(((double)n/max_iter), 0.6)) *255;
+	 G = (pow(((double)n/max_iter), 0.3)) *255;
+         B = (pow(((double)n/max_iter), 0.2)) *255;
+	} 
+//	cout << "R:" << R << " G:" << G << " B:" << B <<endl;
 	 
 	 m_bitmap[x*m_height*4 + y*4] = R;
 	 m_bitmap[x*m_height*4 + y*4 + 1] = G;
