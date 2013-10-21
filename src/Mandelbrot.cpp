@@ -10,7 +10,7 @@ void Mandelbrot::gen_fractal()
       int i, npixels = width * height;
       
 //      int pixArray[height][width];
-      
+#pragma omp parallel for      
       for(i = 0; i < npixels; i++){
 	  int x = i%width;
 	  int y = i/width;
@@ -29,9 +29,15 @@ void Mandelbrot::gen_fractal()
 		z_r = z_temp;
 		n++;
 	  }
+	 if(n < max_iter){     //continuous coloring.. or something like it.
+		double zn = x*x + y*y;
+		double nu = log(1/(2*log(zn))/log(2<<16))/log(2);
+		n = n + 1 - nu;
+	 }
+	 n = pow(n , 2);	
 	 int R = (pow(((double)n/max_iter), 0.6)) *255;
-	 int G = (pow(((double)n/max_iter), 0.5)) *255;
-         int B = (pow(((double)n/max_iter), 0.4)) *255;
+	 int G = (pow(((double)n/max_iter), 0.3)) *255;
+         int B = (pow(((double)n/max_iter), 0.2)) *255;
 	 cout << "R:" << R << " G:" << G << " B:" << B <<endl;
 	 
 	 m_bitmap[x*m_height*4 + y*4] = R;
